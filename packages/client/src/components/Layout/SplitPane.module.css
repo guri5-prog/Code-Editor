@@ -1,0 +1,32 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.topPane {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.divider {
+  height: 4px;
+  flex-shrink: 0;
+  background-color: var(--border);
+  cursor: row-resize;
+  position: relative;
+  z-index: 10;
+  transition: background-color 0.15s;
+}
+
+.divider:hover,
+.dividerActive {
+  background-color: var(--accent);
+}
+
+.bottomPane {
+  overflow: hidden;
+  min-height: 0;
+}

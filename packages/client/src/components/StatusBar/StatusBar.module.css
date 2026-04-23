@@ -1,0 +1,75 @@
+.statusBar {
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-secondary);
+  gap: 16px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dotGreen {
+  composes: dot;
+  background-color: var(--success);
+}
+
+.dotRed {
+  composes: dot;
+  background-color: var(--error);
+}
+
+.dotYellow {
+  composes: dot;
+  background-color: var(--warning);
+}
+
+.dotBlue {
+  composes: dot;
+  background-color: var(--accent);
+}
+
+.saving {
+  color: var(--accent);
+}
+
+.saved {
+  color: var(--success);
+}
+
+.error {
+  color: var(--error);
+}
+
+.offline {
+  color: var(--warning);
+}

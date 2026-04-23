@@ -1,0 +1,18 @@
+@media (max-width: 1024px) {
+  [data-app-shell='true'] [data-app-sidebar='true'] {
+    width: 78px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-app-shell='true'] [data-app-body='true'] {
+    flex-direction: column;
+  }
+
+  [data-app-shell='true'] [data-app-sidebar='true'] {
+    width: 100% !important;
+    max-height: 180px;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border);
+  }
+}

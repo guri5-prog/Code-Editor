@@ -1,0 +1,209 @@
+.panel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+}
+
+.toolbar {
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.statusRunning {
+  composes: statusDot;
+  background-color: var(--accent);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.statusSuccess {
+  composes: statusDot;
+  background-color: var(--success);
+}
+
+.statusError {
+  composes: statusDot;
+  background-color: var(--error);
+}
+
+.statusTimeout {
+  composes: statusDot;
+  background-color: var(--warning);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.btn {
+  padding: 2px 8px;
+  font-size: 11px;
+  font-family: inherit;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.runBtn {
+  composes: btn;
+  background-color: var(--success);
+  color: #fff;
+  border-color: var(--success);
+  font-weight: 600;
+}
+
+.runBtn:hover {
+  opacity: 0.9;
+  background-color: var(--success);
+  color: #fff;
+}
+
+.runBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.outputBody {
+  flex: 1;
+  overflow: auto;
+  padding: 8px 12px;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.stdout {
+  color: var(--text-primary);
+}
+
+.stderr {
+  color: var(--error);
+}
+
+.meta {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 16px;
+}
+
+.emptyOutput {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.stdinSection {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.stdinInput {
+  flex: 1;
+  padding: 4px 8px;
+  min-height: 52px;
+  resize: vertical;
+  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  font-size: 12px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  outline: none;
+}
+
+.stdinInput:focus {
+  border-color: var(--accent);
+}
+
+.ansiBlack {
+  color: #6c7086;
+}
+
+.ansiRed {
+  color: #f38ba8;
+}
+
+.ansiGreen {
+  color: #a6e3a1;
+}
+
+.ansiYellow {
+  color: #f9e2af;
+}
+
+.ansiBlue {
+  color: #89b4fa;
+}
+
+.ansiMagenta {
+  color: #cba6f7;
+}
+
+.ansiCyan {
+  color: #94e2d5;
+}
+
+.ansiWhite {
+  color: var(--text-primary);
+}
