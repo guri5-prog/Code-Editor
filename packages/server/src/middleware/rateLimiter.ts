@@ -51,7 +51,8 @@ function createLimiter(options: Parameters<typeof rateLimit>[0]): RequestHandler
   }
 
   if (env.REDIS_OPTIONAL) {
-    const { store: _store, ...fallbackOptions } = options;
+    const fallbackOptions = { ...(options ?? {}) };
+    delete fallbackOptions.store;
     return rateLimit(fallbackOptions);
   }
 
