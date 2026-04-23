@@ -16,7 +16,7 @@
     "typecheck": "tsc -b packages/shared packages/client packages/server",
     "format": "prettier --write \"packages/*/src/**/*.{ts,tsx,css}\"",
     "format:check": "prettier --check \"packages/*/src/**/*.{ts,tsx,css}\"",
-    "prepare": "node -e \"if (process.env.CI || process.env.NODE_ENV === 'production') process.exit(0)\" && husky"
+    "prepare": "husky || true"
   },
   "engines": {
     "node": ">=18.0.0"
