@@ -23,6 +23,9 @@ import { isRedisHealthy } from './database/redis.js';
 
 const app = express();
 
+// Render and other managed hosts terminate TLS and forward client IPs via proxy headers.
+app.set('trust proxy', 1);
+
 app.use(
   helmet({
     contentSecurityPolicy: {

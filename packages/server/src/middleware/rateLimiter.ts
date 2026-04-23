@@ -50,6 +50,11 @@ function createLimiter(options: Parameters<typeof rateLimit>[0]): RequestHandler
     return devBypassLimiter;
   }
 
+  if (env.REDIS_OPTIONAL) {
+    const { store: _store, ...fallbackOptions } = options;
+    return rateLimit(fallbackOptions);
+  }
+
   return rateLimit(options);
 }
 
