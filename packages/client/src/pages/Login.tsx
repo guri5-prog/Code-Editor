@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { clearAccessToken, isAuthenticated, setAccessToken } from '../services/auth';
+import { getApiUrl } from '../config/runtime';
 
 interface TokenExchangeResponse {
   accessToken: string;
@@ -33,7 +34,7 @@ export function Login() {
     setBusy(true);
     setError('');
 
-    fetch('/api/auth/token', {
+    fetch(getApiUrl('/api/auth/token'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -85,7 +86,7 @@ export function Login() {
           {authProviders.map((provider) => (
             <a
               key={provider.id}
-              href={`/api/auth/${provider.id}`}
+              href={getApiUrl(`/api/auth/${provider.id}`)}
               style={providerBtnStyle}
               aria-disabled={busy}
             >

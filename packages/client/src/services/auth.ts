@@ -1,3 +1,5 @@
+import { getApiUrl } from '../config/runtime';
+
 let accessToken: string | null = null;
 let authInitialized = false;
 let refreshInFlight: Promise<string | null> | null = null;
@@ -28,7 +30,7 @@ export async function refreshAccessToken(): Promise<string | null> {
 
   refreshInFlight = (async () => {
     try {
-      const res = await fetch('/api/auth/refresh', {
+      const res = await fetch(getApiUrl('/api/auth/refresh'), {
         method: 'POST',
         credentials: 'include',
       });
@@ -58,7 +60,7 @@ export async function initializeAuth(): Promise<void> {
 
 export async function logout(): Promise<void> {
   try {
-    await fetch('/api/auth/logout', {
+    await fetch(getApiUrl('/api/auth/logout'), {
       method: 'POST',
       credentials: 'include',
     });

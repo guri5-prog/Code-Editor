@@ -1,6 +1,7 @@
 import type { ExecutionResult, ExecutionServerMessage } from '@code-editor/shared';
 import { useExecutionStore } from '../store/executionStore';
 import { getAccessToken } from './auth';
+import { getApiUrl, getWebSocketUrl } from '../config/runtime';
 
 type ExecutionEvent =
   | { type: 'started' }
@@ -40,7 +41,7 @@ export async function runCode(
     const token = getAccessToken();
     if (token) headers.Authorization = `Bearer ${token}`;
 
-    const res = await fetch('/api/execute', {
+    const res = await fetch(getApiUrl('/api/execute'), {
       method: 'POST',
       headers,
       credentials: 'include',
@@ -95,8 +96,7 @@ function runCodeOverWebSocket(
   stdin: string,
 ): Promise<boolean> {
   return new Promise((resolve) => {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const ws = new WebSocket(`${protocol}//${window.location.host}/ws/execute`);
+    const ws = new WebSocket(getWebSocketUrl('/ws/execute'));
     let opened = false;
     let settled = false;
 

@@ -5,6 +5,7 @@ import { startCollabSession, stopCollabSession } from '../../collab/collabProvid
 import { PresencePanel } from './PresencePanel';
 import type { CollabPermission } from '@code-editor/shared';
 import { getAccessToken } from '../../services/auth';
+import { getApiUrl } from '../../config/runtime';
 
 type AuthTokenPayload = { userId?: string; email?: string };
 
@@ -94,7 +95,7 @@ function CollabDialog({ onClose }: { onClose: () => void }) {
     const token = getAccessToken();
     if (token) {
       try {
-        const res = await fetch(`/api/projects/${projectId}/share`, {
+        const res = await fetch(getApiUrl(`/api/projects/${projectId}/share`), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -134,7 +135,7 @@ function CollabDialog({ onClose }: { onClose: () => void }) {
     }
 
     try {
-      const res = await fetch('/api/collab/join', {
+      const res = await fetch(getApiUrl('/api/collab/join'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,6 +2,7 @@ import * as Y from 'yjs';
 import { WebsocketProvider } from 'y-websocket';
 import { useCollabStore } from '../store/collabStore';
 import type { CollabPermission, ChatMessage } from '@code-editor/shared';
+import { getWebSocketUrl } from '../config/runtime';
 
 let activeSession: {
   doc: Y.Doc;
@@ -35,8 +36,7 @@ export function startCollabSession(
 
   const doc = new Y.Doc();
 
-  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const serverUrl = `${protocol}//${window.location.host}/ws/collab`;
+  const serverUrl = getWebSocketUrl('/ws/collab');
   const roomName = `${projectId}/${fileId}`;
 
   const provider = new WebsocketProvider(serverUrl, roomName, doc, {

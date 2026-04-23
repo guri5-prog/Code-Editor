@@ -1,4 +1,5 @@
 import { getAccessToken, refreshAccessToken } from './auth';
+import { getApiUrl } from '../config/runtime';
 
 export async function apiFetch<T>(input: RequestInfo | URL, init: RequestInit = {}): Promise<T> {
   const request = async (): Promise<Response> => {
@@ -10,7 +11,9 @@ export async function apiFetch<T>(input: RequestInfo | URL, init: RequestInit = 
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
-    return fetch(input, { ...init, headers, credentials: 'include' });
+    const resolvedInput =
+      typeof input === 'string' ? getApiUrl(input) : input instanceof URL ? getApiUrl(input.toString()) : input;
+    return fetch(resolvedInput, { ...init, headers, credentials: 'include' });
   };
 
   let res = await request();

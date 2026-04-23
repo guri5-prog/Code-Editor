@@ -1,4 +1,5 @@
 import type { ReplClientMessage, ReplServerMessage } from '@code-editor/shared';
+import { getWebSocketUrl } from '../config/runtime';
 
 export interface ReplCallbacks {
   onReady: (language: string) => void;
@@ -13,8 +14,7 @@ export class ReplConnection {
 
   constructor(language: string, callbacks: ReplCallbacks) {
     this.callbacks = callbacks;
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const url = `${protocol}//${window.location.host}/ws/repl?language=${encodeURIComponent(language)}`;
+    const url = `${getWebSocketUrl('/ws/repl')}?language=${encodeURIComponent(language)}`;
 
     this.ws = new WebSocket(url);
 
