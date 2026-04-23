@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { createServer } from 'http';
 import app from './app.js';
+import { env } from './config/env.js';
 import { connectMongo, disconnectMongo } from './database/mongo.js';
 import { connectRedis, disconnectRedis } from './database/redis.js';
 import { setupReplWebSocket } from './routes/repl.routes.js';
@@ -11,7 +12,14 @@ const PORT = process.env.PORT || 3001;
 
 async function start(): Promise<void> {
   await connectMongo();
-  await connectRedis();
+  try {
+    await connectRedis();
+  } catch (err) {
+    if (!env.REDIS_OPTIONAL) {
+      throw err;
+    }
+    console.warn('Redis unavailable, continuing with degraded mode');
+  }
 
   const httpServer = createServer(app);
   setupReplWebSocket(httpServer);
